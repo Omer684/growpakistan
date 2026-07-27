@@ -1,6 +1,30 @@
 
 
-// 5. Event Listeners
+let teamData = []
+
+const INITIAL_VISIBLE_COUNT = 4;
+
+const fetchTeamData = async () => {
+    const res = await fetch("https://bejewelled-pegasus-d13092.netlify.app/api/teamMembers/")
+    teamData = await res.json()
+    console.log(teamData)
+}
+
+function renderTeamSection() {
+    const teamGrid = document.getElementById('team-grid');
+
+    teamGrid.innerHTML = teamData.map((member, index) => `
+        <div class="team-card relative group bg-slate-50 border border-slate-100 rounded-2xl p-6 text-center shadow-sm hover:border-brand/30 transition-all duration-300 ${index >= INITIAL_VISIBLE_COUNT ? 'hidden' : ''}" data-slug="${member.slug}" data-id="${member._id}">
+            <a href="./profile.html?member=${member.slug}" class="block">
+                <div class="w-full aspect-square bg-slate-200 rounded-xl overflow-hidden mb-4 shadow-inner">
+                    <img src="${member.photo}" alt="${member.name}" class="w-full h-full object-cover object-top">
+                </div>
+                <h4 class="font-bold text-lg text-slate-900">${member.title}</h4>
+                <p class="text-xs font-semibold text-brand tracking-wider uppercase mt-1">${member.name}</p>
+            </a>        
+        </div>
+    `).join('');
+}
 
 
 // MOBILE MENU TOGGLE
@@ -95,3 +119,11 @@ document.getElementById('see-more-btn').addEventListener('click', function() {
         document.getElementById('team').scrollIntoView({ behavior: 'smooth' });
     }
 });
+
+const init = async () => {
+    await fetchTeamData(); // Wait for data to arrive completely
+    renderTeamSection();   // Run only after teamData is populated Initialize your modal events
+};
+
+init();
+
