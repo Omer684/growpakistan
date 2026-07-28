@@ -5,7 +5,7 @@ let teamData = []
 const INITIAL_VISIBLE_COUNT = 4;
 
 const fetchTeamData = async () => {
-    const res = await fetch("https://bejewelled-pegasus-d13092.netlify.app/api/teamMembers/")
+    const res = await fetch("https://grow-pakistan-api.netlify.app/api/teamMembers/")
     teamData = await res.json()
     console.log(teamData)
 }
