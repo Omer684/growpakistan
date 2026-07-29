@@ -2,7 +2,7 @@ const teamData = {}
 
 const fetchTeamData = async () => {
     try {
-        const res = await fetch("https://bejewelled-pegasus-d13092.netlify.app/api/teamMembers/");
+        const res = await fetch("https://grow-pakistan-api.netlify.app/api/teamMembers/");
         const dataArray = await res.json(); // Array from backend
         
         // Clear old properties if re-fetching
@@ -16,7 +16,7 @@ const fetchTeamData = async () => {
         console.log("Converted Team Data Object:", teamData); 
         
     } catch (error) {
-        console.error("Error fetching or formatting data:", error);
+        console.error("Error ing or formatting data:", error);
     }
 };
 
