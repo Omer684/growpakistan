@@ -1,4 +1,4 @@
-const teamData = {}
+let teamData = {};
 
 const fetchTeamData = async () => {
     try {
@@ -16,48 +16,52 @@ const fetchTeamData = async () => {
         console.log("Converted Team Data Object:", teamData); 
         
     } catch (error) {
-        console.error("Error ing or formatting data:", error);
+        console.error("Error fetching or formatting data:", error);
     }
 };
 
 function switchProfile(key) {
-    const mainSection = document.getElementById("main");
-
     const member = teamData[key];
     if (!member) {
         console.warn(`Member with key "${key}" not found in teamData.`);
         return;
     }
 
-    // Update DOM Elements
-    document.getElementById('profilePhoto').src = member.photo;
-    document.getElementById('profilePhoto').alt = member.name;
-    document.getElementById('profileName').innerText = member.name;
-    document.getElementById('profileTitle').innerText = member.title;
-    document.getElementById('profileBio').innerText = member.bio;
+    // Safely update DOM Elements
+    const photoEl = document.getElementById('profilePhoto');
+    const nameEl = document.getElementById('profileName');
+    const titleEl = document.getElementById('profileTitle');
+    const bioEl = document.getElementById('profileBio');
+
+    if (photoEl) {
+        photoEl.src = member.photo || '';
+        photoEl.alt = member.name || 'Team Member';
+    }
+    if (nameEl) nameEl.innerText = member.name || '';
+    if (titleEl) titleEl.innerText = member.title || '';
+    if (bioEl) bioEl.innerText = member.bio || '';
     
     // Optional: Render quote if it exists
     const quoteEl = document.getElementById('profileQuote');
-    if (quoteEl && member.quote) {
-        quoteEl.innerText = `"${member.quote}"`;
+    if (quoteEl) {
+        quoteEl.innerText = member.quote ? `"${member.quote}"` : '';
     }
 
     // Clear and Render Tags
     const tagsContainer = document.getElementById('profileTags');
-    tagsContainer.innerHTML = '';
-    
-    if (member.tags && Array.isArray(member.tags)) {
-        member.tags.forEach(tag => {
-            const tagSpan = document.createElement('span');
-            tagSpan.className = "bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-200/60";
-            tagSpan.innerText = tag;
-            tagsContainer.appendChild(tagSpan);
-        });
+    if (tagsContainer) {
+        tagsContainer.innerHTML = '';
+        if (member.tags && Array.isArray(member.tags)) {
+            member.tags.forEach(tag => {
+                const tagSpan = document.createElement('span');
+                tagSpan.className = "bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-200/60";
+                tagSpan.innerText = tag;
+                tagsContainer.appendChild(tagSpan);
+            });
+        }
     }
 }
 
-// ✅ REFACTORED PAGE HANDLER: Runs only after your backend data finishes downloading
-// ✅ REFACTORED ROUTE & DROPDOWN HANDLER
 function initializeProfileRoute() {
     const urlParams = new URLSearchParams(window.location.search);
     const memberKey = urlParams.get('member');
@@ -67,12 +71,20 @@ function initializeProfileRoute() {
     if (selectorEl) {
         selectorEl.innerHTML = ''; // Wipe out any lingering placeholders
 
-        // Loop over our database object keys to create options dynamically
+        // Loop over database object values to create options dynamically
         Object.values(teamData).forEach(member => {
             const option = document.createElement('option');
             option.value = member.slug; // Value matches database unique slug path
             option.textContent = `${member.name} (${member.title})`; // Displays Name (Role)
             selectorEl.appendChild(option);
+        });
+
+        // ✅ Dynamic Event Listener for User Selection Changes
+        selectorEl.addEventListener('change', (e) => {
+            const selectedSlug = e.target.value;
+            switchProfile(selectedSlug);
+            // Update browser URL query without causing a page reload
+            window.history.pushState({}, '', `?member=${selectedSlug}`);
         });
     }
 
@@ -81,7 +93,7 @@ function initializeProfileRoute() {
         if (selectorEl) selectorEl.value = memberKey; // Synchronize visual state
         switchProfile(memberKey);
     } else {
-        // Fallback: Automatically load the first team member returned by your database
+        // Fallback: Automatically load the first team member returned by database
         const totalKeys = Object.keys(teamData);
         if (totalKeys.length > 0) {
             const firstAvailableMember = totalKeys[0]; // Grab index 0
@@ -92,7 +104,6 @@ function initializeProfileRoute() {
         }
     }
 }
-
 
 // MULTI-DIRECTION INTERSECTION OBSERVER
 document.addEventListener("DOMContentLoaded", () => {
@@ -115,10 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(animationSelectors).forEach(el => observer.observe(el));
 });
 
-// ✅ REFACTORED STARTUP SEQUENCE
+// STARTUP SEQUENCE
 const init = async () => {
-    await fetchTeamData();        // 1. Completely wait for the backend API request to fill the teamData object
-    initializeProfileRoute();     // 2. Run your profile routing layout setup now that data actually exists
+    await fetchTeamData();        // Wait for database download
+    initializeProfileRoute();     // Render layout and route options
 };
 
 init();
