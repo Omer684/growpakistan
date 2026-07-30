@@ -127,3 +127,32 @@ const init = async () => {
 
 init();
 
+// Functionality for the "See More Team Members" button
+document.addEventListener('DOMContentLoaded', () => {
+    const seeMoreBtn = document.getElementById('see-more-btn');
+    const extraTeamMembers = document.getElementById('extra-team-members');
+
+    if (seeMoreBtn && extraTeamMembers) {
+        seeMoreBtn.addEventListener('click', () => {
+            // Toggle the visibility
+            extraTeamMembers.classList.toggle('hidden');
+            
+            // Change the button text and flip the arrow based on state
+            if (extraTeamMembers.classList.contains('hidden')) {
+                seeMoreBtn.innerHTML = `
+                    See More Team Members
+                    <svg class="ml-2 h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                `;
+            } else {
+                seeMoreBtn.innerHTML = `
+                    See Less Team Members
+                    <svg class="ml-2 h-4 w-4 text-slate-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                `;
+            }
+        });
+    }
+});
