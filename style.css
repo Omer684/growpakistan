@@ -2,7 +2,20 @@
     background-color: #24BD27 !important;
     color: white !important;
 }
+/* 1. Global background for the rest of the website */
+body {
+    background-image: url('images/background/background.jpeg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+}
 
+/* 2. Target the background image layer inside your hero section */
+.hero-section .absolute.inset-0.bg-cover {
+    background-image: url('./images/background/header-background.jpeg') !important;
+}
 /* ==========================================================================
 PREMIUM EXTENDED-DISTANCE DIRECTIONAL SCROLL REVEAL ENGINE
 ========================================================================== */
