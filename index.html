@@ -1807,56 +1807,81 @@
     </section>
 
     <!-- PARTNERSHIPS & COLLABORATIONS SECTION (Minimal Clean Logos) -->
-    <section class="py-12 bg-slate-50 border-t border-b border-slate-100">
+    <!-- Partners Section -->
+<section class="py-12 bg-slate-50 border-t border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h4 class="reveal-hidden text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-10">
             Our Trusted Partnerships & Collaborations
         </h4>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 items-center justify-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 items-center justify-center" id="partners-grid">
             <!-- Logo 1 -->
-            <div class="reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/logo2.jpeg" alt="Partner Logo 1" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 2 -->
-            <div class="reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/mehmar-enhanced-logo.jpg" alt="Mehmar Logo" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 3 -->
-            <div class="reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/digital-asprie-logo.png" alt="Digital Aspire Logo" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 4 -->
-            <div class="reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/pakistan-nawjawan-party.png" alt="Pakistan Nawjawan Party Logo" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 5 -->
-            <div class="reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/ipch-logo.jpeg" alt="IPCH Logo" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 6 -->
-            <div class="reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-left flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/rah-e-tauheed-logo.jpeg" alt="Rah-e-Tauheed Logo" class="max-w-full max-h-full object-contain">
             </div>
 
             <!-- Logo 7 -->
-            <div class="reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <div class="partner-card reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/progressice-climate-foundation-logo.jpeg" alt="Progressive Climate Foundation Logo" class="max-w-full max-h-full object-contain">
             </div>
 
-            <!-- Logo 8: Aurat Tech -->
-            <div class="reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
+            <!-- Logo 8 -->
+            <div class="partner-card reveal-right flex items-center justify-center h-16 p-2 bg-white rounded-xl shadow-sm transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer">
                 <img src="./images/logos/aurat%20tech.jpeg" alt="Aurat Tech Logo" class="max-w-full max-h-full object-contain">
             </div>
         </div>
     </div>
 </section>
 
+<style>
+  /* Desktop: grayscale by default, color on hover */
+  @media (hover: hover) and (pointer: fine) {
+    .partner-card {
+      filter: grayscale(1);
+    }
+    .partner-card:hover {
+      filter: grayscale(0);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    }
+  }
+
+  /* Mobile/touch: always full color, no grayscale */
+  @media (hover: none), (pointer: coarse) {
+    .partner-card {
+      filter: grayscale(0);
+    }
+    .partner-card:active {
+      transform: scale(0.97);
+    }
+  }
+</style>
+
+    
     <section id="internships" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
