@@ -823,9 +823,8 @@
                         </div>
                     </div>
                     <div class="p-6 bg-slate-50/50 border-t border-slate-100">
-                        <a href="https://wa.me/3035775905?text="
-                            class="block w-full text-center bg-brand hover:bg-brand-dark text-white font-medium py-2.5 rounded-xl text-sm transition-colors">Enroll
-                            via Whatsapp</a>
+                    <button onclick="openModal('Web Development')" class="w-full bg-green-500 hover:bg-green-600 active:scale-95 text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer">Enroll Now</button>
+                        </div>
                     </div>
                 </div>
 
@@ -2127,6 +2126,7 @@
                     <!-- <div class="w-full h-48 bg-slate-200 rounded-2xl border border-slate-300 flex items-center justify-center font-bold text-slate-400 relative overflow-hidden">
                         <span>[Google Maps Location Embedded Here]</span>
                     </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -2192,7 +2192,69 @@
 
     </script>
 
+<!-- Enrollment Modal -->
+<div id="enrollModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+    
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+      <div>
+        <h3 class="text-lg font-bold text-slate-800">Enroll Now</h3>
+        <p class="text-sm text-slate-500" id="modalCourseName"></p>
+      </div>
+      <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg hover:bg-slate-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
 
+    <!-- Google Form iframe -->
+    <div class="flex-1 overflow-auto rounded-b-2xl">
+      <iframe
+        id="enrollForm"
+        src=""
+        width="100%"
+        height="550"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0">
+        Loading…
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfv98qheO1mqktDK9Uo8c0jea9FmnugxMJZlFY7rk5wQTY6gg/viewform?embedded=true";
+
+  function openModal(courseName) {
+    const modal = document.getElementById('enrollModal');
+    document.getElementById('modalCourseName').textContent = courseName;
+    document.getElementById('enrollForm').src = FORM_URL;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('enrollModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.getElementById('enrollForm').src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Close on backdrop click
+  document.getElementById('enrollModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
 
 </body>
 
